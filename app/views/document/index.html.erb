@@ -1,0 +1,65 @@
+<section class="container">
+	<div class="card-box">
+		<div class="panel">
+			<div class="panel-title">
+				<h1 class="m-t-10 header-title">Upload do documento</h1>
+			</div>
+			<div class="panel-body">
+			<%= form_for :document, :url => { :action => "create" } do |f| %>
+
+				<div class="field">
+				<tag><b>Professor: </b></tag> </br>
+				<%= f.text_field :teacher, list: "listTeacher",  class: 'awesomplete', required: true %><br>
+				<datalist id="listTeacher">
+					<% Document.where(approved: true).distinct.pluck(:teacher).each do |d| %>
+						<option value="<%= d %>"></option>
+					<% end %>
+				</datalist>
+				</div>
+
+				<div class="field">
+				<tag><b>Disciplina: </b></tag> </br>
+				<%= f.text_field :subject, list: "listSubject",  class: 'awesomplete', required: true %><br>
+				<datalist id="listSubject">
+					<% Document.where(approved: true).distinct.pluck(:subject).each do |d| %>
+						<option value="<%= d %>"></option>
+					<% end %>
+				</datalist>
+				</div>
+
+				<div class="field">
+				<tag><b>Ano: </b></tag> </br>
+				<%= f.number_field :year, required: true %>
+				</div>
+
+				<div class="field">
+				<tag><b>Índice: </b></tag> </br>
+				<%= f.number_field :indexdoc, required: true %>
+				</div>
+
+				<div class="field">
+				<tag><b>Tipo: </b></tag> </br>
+				<%= f.text_field :typedoc, list: "listTypedoc",  class: 'awesomplete', required: true %><br>
+				<datalist id="listTypedoc">
+					<% Document.where(approved: true).distinct.pluck(:typedoc).each do |d| %>
+						<option value="<%= d %>"></option>
+					<% end %>
+				</datalist>
+				</div>
+
+				<div class="field">
+				<tag><b>Arquivo: </b></tag> </br>
+				<%= f.file_field :datafile, :multiple => true, required: true %><br>
+				</div>
+
+				<%= submit_tag "Create" %>
+			<% end %>
+
+			<% if flash[:num_max_req] %>
+				<div><%= flash[:num_max_req] %></div>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</section>
+

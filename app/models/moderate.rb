@@ -1,0 +1,2 @@
+class Moderate < ApplicationRecord
+end

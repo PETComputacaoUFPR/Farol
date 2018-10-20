@@ -1,0 +1,144 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/*
+ * VARIABLES
+ */
+
+$IDV_RED: #b72e40;
+$IDV_DARK_RED: #971e30;
+$IDV_DARK_BLUE: #07273e;
+$IDV_GRAY: #cbc9c5;
+$NAV_HEIGHT: 72px;
+$NAV_BUTTON_FONT_SIZE: 12pt;
+$NAV_BUTTON_PADDING: $NAV_HEIGHT / 4;
+
+.farol-navbar {
+  background-color: #041c2d;
+}
+
+/*
+ * HTML -------- FF q fez
+ */
+h1, h2, h3, h4, p, i, b, a, button, span {
+	font-family: Lato;
+	font-variant: normal; 
+}
+
+body {
+	background-color: $IDV_GRAY;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  display: block;
+}
+
+.clearfix {
+  content: '';
+  clear:both;
+  display:table;
+}
+
+.header-title {
+  text-transform: uppercase;
+  font-size: 16pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin-left: 15px;
+  margin-bottom: 8px;
+}
+
+.farol-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $NAV_HEIGHT;
+  border: none;
+  background-color: $IDV_DARK_BLUE;
+
+  * {
+    height: inherit;
+  }
+
+  &__content {
+    border: inherit;
+    margin: 0;
+    padding: 0;
+
+    &__buttons {
+      a {
+        font-size: $NAV_BUTTON_FONT_SIZE;
+        font-weight: 500;
+        letter-spacing: .06em;
+        width: 120px;
+        float: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        transition: .4s ease;
+      }
+
+      a:hover {
+        background-color: $IDV_DARK_RED;
+        transition: .4s ease;
+      }
+
+      a:hover,
+      a:focus,
+      a:active {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.farol-body {
+  margin-top: $NAV_HEIGHT + 60px;
+}
+
+.logo-img {
+  position: absolute;
+  left: 15px;
+  top: -13px;
+  width: 95px;
+  height: 95px;
+}
+
+.logo-text {
+  color: #ffffff !important;
+  font-size: 17pt;
+  font-weight: 700;
+  letter-spacing: .05em;
+  position: absolute;
+  top: 20px;
+  left: 125px;
+  text-transform: uppercase;
+  float: left;
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .farol-nav {
+    height: $NAV_HEIGHT - 10px;
+  }
+
+  .logo-img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .logo-text {
+    font-size: 14pt;
+  }
+}
+

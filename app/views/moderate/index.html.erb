@@ -1,0 +1,50 @@
+<%= javascript_tag do %>
+  $(document).ready(function() {
+	  	var id;
+		var dataSet = <%= raw Document.where(approved: false).pluck(:subject, :teacher, :year, :typedoc, :indexdoc, :id).to_json %>;
+  		dataSet.map(function(x){
+			id = x[x.length-1];
+			x[x.length-1] = '<a href="/search/show/'+id+'">PDF</a>';
+			x.push('<a data-confirm="are you sure?" class="glyphicon glyphicon-ok" rel="nofollow" data-method="post" href="/moderate/approve?id='+id+'"></a>');
+			x.push('<a class="glyphicon glyphicon-edit" data-method="get" href="/moderate/edit/'+id+'"></a>');
+			x.push('<a data-confirm="are you sure?" class="glyphicon glyphicon-trash" rel="nofollow" data-method="delete" href="/moderate?id='+id+'"></a>');
+		});
+    	$('#table-docs').DataTable({
+			data: dataSet,
+			serverSide: false,
+			responsive: true,
+      		columns: [
+				{ title: "Disciplina" },
+				{ title: "Professor" },
+				{ title: "Ano" },
+				{ title: "Tipo" },
+				{ title: "Índice" },
+				{ title: "Arquivo" },
+				{ title: "" },
+				{ title: "" },
+				{ title: "" }
+      		]
+		});
+
+	});
+<% end %>
+
+<section class="container">
+	<div class="card-box">
+		<div class="panel">
+			<div class="panel-title">
+				<h1 class="m-t-10 header-title">Moderador</h1>
+			</div>
+			<div class="panel-body">
+				<% if current_user.admin? %>
+				<%= link_to "Ver provas aprovadas", controller: "moderate", action: "show_approved" %>
+				<% end %>
+				<h3>Provas não aprovadas:</h3>
+				<br>
+				<table id="table-docs" class="display nowrap" style="width:100%">
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+

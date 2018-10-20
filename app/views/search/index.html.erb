@@ -1,0 +1,39 @@
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+
+		var dataSet = <%= raw Document.where(approved: true).pluck(:subject, :teacher, :year, :typedoc, :indexdoc, :id).to_json %>;
+  		dataSet.map(function(x){
+  	 		x[x.length-1] = '<a href="/search/show/'+x[x.length-1]+'">PDF</a>';
+		});
+    	$('#table-docs').DataTable({
+			data: dataSet,
+			serverSide: false,
+			responsive: true,
+      		columns: [
+				{ title: "Disciplina" },
+				{ title: "Professor" },
+				{ title: "Ano" },
+				{ title: "Tipo" },
+				{ title: "Índice" },
+				{ title: "Arquivo" }
+      		]
+		});
+
+	});
+<% end %>
+
+
+<section class="container">
+	<div class="card-box">
+		<div class="panel">
+			<div class="panel-title">
+				<h1 class="m-t-10 header-title">Documentos</h1>
+			</div>
+			<div class="panel-body">
+				<table id="table-docs" class="display nowrap" style="width:100%">
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
